@@ -367,7 +367,7 @@
     margin-right: calc(100% - 100vw);
 }
 #menu {
-    background: #92cafa;
+    background: #d6dbdf;
     box-shadow: 0 -1px 10px 0 #9e9e9e4d;
     font-weight: bold;
     line-height: 50px;
@@ -464,7 +464,7 @@
     margin: 0;
     padding: 0;
     position: relative;
-    scrollbar-color: #8ab5ff #e6efff;
+    scrollbar-color: rgba(162, 175, 185, 1) #e6efff;
     scrollbar-width: thin;
     word-wrap: break-word;
 }
