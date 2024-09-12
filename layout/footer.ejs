@@ -2,7 +2,13 @@
     <div id="footer-wrap">
         <div>
             &copy;
-            <%= theme.footer.since %> - <%= date(Date.now(), "YYYY") %> <%= config.title %>
+            <% let now = date(Date.now(), "YYYY") %>
+            <% if (theme.footer.since < now) { %>
+                <%= theme.footer.since %> - <%= date(Date.now(), "YYYY") %>
+            <% } else { %>
+                <%= now %>
+            <% } %>
+            <%= config.title %>
             <span id="footer-icon">
                 <i class="fa-solid fa-font-awesome fa-fw"></i>
             </span>
@@ -13,14 +19,14 @@
             <a href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
         </div>
         <% if (theme.footer.ICP.enable) { %>
-        <div>
-            备案号：
-            <% if (theme.footer.ICP.link) { %>
-            <a href="<%- url_for(theme.footer.ICP.link) %>"><%= theme.footer.ICP.code %></a>
-            <% } else { %>
-            <%= theme.footer.ICP.code %>
-            <% } %>
-        </div>
+            <div>
+                备案号：
+                <% if (theme.footer.ICP.link) { %>
+                    <a href="<%- url_for(theme.footer.ICP.link) %>"><%= theme.footer.ICP.code %></a>
+                <% } else { %>
+                    <%= theme.footer.ICP.code %>
+                <% } %>
+            </div>
         <% } %>
     </div>
 </footer>
