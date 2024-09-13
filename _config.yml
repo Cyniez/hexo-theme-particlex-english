@@ -6,7 +6,6 @@ avatar: /images/avatar.jpg
 
 # Home page background image
 background:
-    - /images/background.jpg
 
 # Loading image
 loading: /images/loading.gif
