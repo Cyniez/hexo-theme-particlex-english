@@ -1,6 +1,5 @@
 <%
-let posts = site.posts;
-posts.data.sort((a, b) => b.date - a.date);
+let posts = page.posts
 %>
 <div id="archives">
     <% if (theme.search.enable) { %>
@@ -54,4 +53,5 @@ posts.data.sort((a, b) => b.date - a.date);
             </div>
         <% }); %>
     </div>
+    <%- partial("current") %>
 </div>
