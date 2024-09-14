@@ -172,6 +172,11 @@
     color: #fff;
 }
 
+#timeline-wrap + .page-current .page-num:hover {
+    background: #66afef;
+    color: #fff;
+}
+
 #home-card #card-div .icon-links,
 #home-card #card-div .friend-links {
     border-top: #cdcdcd solid 1px;
@@ -282,6 +287,42 @@
 }
 
 #home-posts .page-current a {
+    color: #999;
+}
+
+#timeline-wrap + .page-current {
+    align-items: center;
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+    margin-top: 50px;
+    text-align: center;
+    width: 100%;
+}
+
+#timeline-wrap + .page-current .current {
+    border-radius: 5px;
+    color: #da0a51;
+    display: inline-block;
+    height: 35px;
+    line-height: 35px;
+    margin: 0 7px;
+    padding: 5px;
+    width: 35px;
+}
+
+#timeline-wrap + .page-current .page-num,
+#timeline-wrap + .page-current .page-omit {
+    border-radius: 5px;
+    display: inline-block;
+    height: 35px;
+    line-height: 35px;
+    margin: 0 7px;
+    padding: 5px;
+    width: 35px;
+}
+
+#timeline-wrap + .page-current a {
     color: #999;
 }
 
@@ -743,6 +784,10 @@ body::-webkit-scrollbar-track {
     height: 7px;
     position: absolute;
     width: 7px;
+}
+
+.timeline-date {
+    font-size: 3em;
 }
 
 ::-webkit-scrollbar {
