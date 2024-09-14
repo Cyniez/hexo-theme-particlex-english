@@ -6,12 +6,33 @@ let posts = page.posts
         <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch"/>
     <% } %>
     <div id="timeline-wrap" ref="timeline">
-        <% posts.reverse().forEach((post, id) => { %>
+        <% let monthly = config.archive_generator.enabled && config.archive_generator.monthly && page.month %>
+        <% let daily = config.archive_generator.enabled && config.archive_generator.daily && page.day %>
+        <% let currentDate %>
+        <% posts.forEach((post, id) => { %>
+            <% if (daily) { %>
+                <% if (currentDate !== date(post.date, "YYYY-M-D dddd")) { %>
+                    <% currentDate = date(post.date, "YYYY-M-D dddd") %>
+                    <div class="timeline-date"><%= currentDate %></div>
+                <% } %>
+            <% } else if (monthly) { %>
+                <% if (currentDate !== date(post.date, "YYYY-M")) { %>
+                    <% currentDate = date(post.date, "YYYY-M") %>
+                    <div class="timeline-date"><%= currentDate %></div>
+                <% } %>
+            <% } else if (config.archive_generator.enabled) { %>
+                <% if (currentDate !== date(post.date, "YYYY")) { %>
+                    <% currentDate = date(post.date, "YYYY") %>
+                    <div class="timeline-date"><%= currentDate %></div>
+                <% } %>
+            <% } %>
             <div class="timeline" data-title="<%- post.title.toLowerCase().replace(/\s+/g, "") %>">
                 <div class="timeline-tail"></div>
                 <div class="timeline-content">
                     <div class="item-time">
-                        <% if (config.archive_generator.enabled && !config.archive_generator.daily) { %><%= date(post.date, "M/D") %>
+                        <% if (daily) { %>
+                        <% } else if (monthly) { %><%= date(post.date, "D dddd") %>
+                        <% } else if (config.archive_generator.enabled) { %><%= date(post.date, "M/D dddd") %>
                         <% } %>
                     </div>
                     <a href="<%- url_for(post.path) %>">
