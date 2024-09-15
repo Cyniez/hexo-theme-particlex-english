@@ -8,19 +8,21 @@ let posts = page.posts
     <div class="control-area">
         <div class="control-text">
             <el-link v-if="<%= config.archive_generator.enabled && config.archive_generator.yearly %>"
-                     :type="currentChoose === 'year' ? 'primary' : 'default'" @click="currentChoose = 'year'">
+                     :type="currentChoose === 'year' ? 'primary' : 'default'"
+                     @click="() => {currentChoose = 'year'; setItem('currentChoose', 'year')}">
                 年
             </el-link>
             <el-link v-if="<%= config.archive_generator.enabled && config.archive_generator.monthly %>"
-                     :type="currentChoose === 'month' ? 'primary' : 'default'" @click="currentChoose = 'month'">
+                     :type="currentChoose === 'month' ? 'primary' : 'default'"
+                     @click="() => {currentChoose = 'month'; setItem('currentChoose', 'month')}">
                 月
             </el-link>
             <el-link v-if="<%= config.archive_generator.enabled && config.archive_generator.daily %>"
-                     :type="currentChoose === 'date' ? 'primary' : 'default'" @click="currentChoose = 'date'">
+                     :type="currentChoose === 'date' ? 'primary' : 'default'"
+                     @click="() => {currentChoose = 'date'; setItem('currentChoose', 'date')}">
                 日
             </el-link>
         </div>
-        <div class="space-area"></div>
         <div class="control-view">
             <label class="date-picker-label" for="date-picker">选择日期</label>
             <% let dates = {} %>
@@ -32,8 +34,7 @@ let posts = page.posts
                             @change="assign('<%= url_for('archives/') %>' + (currentChoose === 'year' ? format(chooseDate, 'YYYY') : currentChoose === 'month' ? format(chooseDate, 'YYYY/MM') : format(chooseDate, 'YYYY/MM/DD')))"
                             :disabled-date="date => ![<%- Object.keys(dates).toString() %>].includes(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate())"
                             v-model="chooseDate"></el-date-picker>
-            <el-link class="show-all" :type="chooseDate === '' ? 'primary' : 'default'"
-                     @click="() => {chooseDate = ''; assign(<%= url_for('archives/') %>)}">全部
+            <el-link class="show-all" @click="assign(<%= url_for('archives/') %>)">全部
             </el-link>
         </div>
     </div>
@@ -44,7 +45,7 @@ let posts = page.posts
         <% let currentDate %>
         <% let currentMonth %>
         <% let currentYear %>
-        <% posts.forEach((post, id) => { %>
+        <% posts.forEach(post => { %>
             <% if (daily) { %>
                 <% if (currentDate !== date(post.date, "YYYY-M-D dddd")) { %>
                     <% currentDate = date(post.date, "YYYY-M-D dddd") %>
