@@ -959,24 +959,24 @@ code,
     font-family: "Fira Code", "Noto Sans SC", monospace;
 }
 
-table:not(.hljs-ln) {
+table:not(.hljs-ln):not(.el-date-table):not(.el-month-table):not(.el-year-table) {
     margin: 15px 0;
 }
 
-table:not(.hljs-ln) td:nth-child(even) {
+table:not(.hljs-ln):not(.el-date-table):not(.el-month-table):not(.el-year-table) td:nth-child(even) {
     background: #c7e0fb4d;
 }
 
-table:not(.hljs-ln) td:nth-child(odd) {
+table:not(.hljs-ln):not(.el-date-table):not(.el-month-table):not(.el-year-table) td:nth-child(odd) {
     background: #d9e8ff4d;
 }
 
-table:not(.hljs-ln) th {
+table:not(.hljs-ln):not(.el-date-table):not(.el-month-table):not(.el-year-table) th {
     background: #a3ddfb;
 }
 
-table:not(.hljs-ln) tr th,
-table:not(.hljs-ln) tr td {
+table:not(.hljs-ln):not(.el-date-table):not(.el-month-table):not(.el-year-table) tr th,
+table:not(.hljs-ln):not(.el-date-table):not(.el-month-table):not(.el-year-table) tr td {
     border-radius: 3px;
     padding: 10px 20px;
 }
