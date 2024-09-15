@@ -5,36 +5,73 @@ let posts = page.posts
     <% if (theme.search.enable) { %>
         <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch"/>
     <% } %>
+    <div class="control-area">
+        <div class="control-text">
+            <el-link v-if="<%= config.archive_generator.enabled && config.archive_generator.yearly %>"
+                     :type="currentChoose === 'year' ? 'primary' : 'default'" @click="currentChoose = 'year'">
+                年
+            </el-link>
+            <el-link v-if="<%= config.archive_generator.enabled && config.archive_generator.monthly %>"
+                     :type="currentChoose === 'month' ? 'primary' : 'default'" @click="currentChoose = 'month'">
+                月
+            </el-link>
+            <el-link v-if="<%= config.archive_generator.enabled && config.archive_generator.daily %>"
+                     :type="currentChoose === 'date' ? 'primary' : 'default'" @click="currentChoose = 'date'">
+                日
+            </el-link>
+        </div>
+        <div class="space-area"></div>
+        <div class="control-view">
+            <label class="date-picker-label" for="date-picker">选择日期</label>
+            <el-date-picker :editable="false" :clearable="false" :type="currentChoose"
+                            id="date-picker"
+                            v-model="chooseDate"></el-date-picker>
+            <el-link class="show-all" :type="chooseDate === '' ? 'primary' : 'default'" @click="chooseDate = ''">全部
+            </el-link>
+        </div>
+    </div>
     <div id="timeline-wrap" ref="timeline">
-        <% let monthly = config.archive_generator.enabled && config.archive_generator.monthly && page.month %>
-        <% let daily = config.archive_generator.enabled && config.archive_generator.daily && page.day %>
+        <% let yearly = config.archive_generator.enabled %>
+        <% let monthly = config.archive_generator.enabled && config.archive_generator.monthly %>
+        <% let daily = config.archive_generator.enabled && config.archive_generator.daily %>
         <% let currentDate %>
+        <% let currentMonth %>
+        <% let currentYear %>
         <% posts.forEach((post, id) => { %>
             <% if (daily) { %>
                 <% if (currentDate !== date(post.date, "YYYY-M-D dddd")) { %>
                     <% currentDate = date(post.date, "YYYY-M-D dddd") %>
-                    <div class="timeline-date"><%= currentDate %></div>
+                    <div class="timeline-date" v-if="currentChoose === 'date'"><%= currentDate %></div>
                 <% } %>
-            <% } else if (monthly) { %>
-                <% if (currentDate !== date(post.date, "YYYY-M")) { %>
-                    <% currentDate = date(post.date, "YYYY-M") %>
-                    <div class="timeline-date"><%= currentDate %></div>
+            <% } %>
+            <% if (monthly) { %>
+                <% if (currentMonth !== date(post.date, "YYYY-M")) { %>
+                    <% currentMonth = date(post.date, "YYYY-M") %>
+                    <div class="timeline-date" v-if="currentChoose === 'month'"><%= currentMonth %></div>
                 <% } %>
-            <% } else if (config.archive_generator.enabled) { %>
-                <% if (currentDate !== date(post.date, "YYYY")) { %>
-                    <% currentDate = date(post.date, "YYYY") %>
-                    <div class="timeline-date"><%= currentDate %></div>
+            <% } %>
+            <% if (yearly) { %>
+                <% if (currentYear !== date(post.date, "YYYY")) { %>
+                    <% currentYear = date(post.date, "YYYY") %>
+                    <div class="timeline-date" v-if="currentChoose === 'year'"><%= currentYear %></div>
                 <% } %>
             <% } %>
             <div class="timeline" data-title="<%- post.title.toLowerCase().replace(/\s+/g, "") %>">
                 <div class="timeline-tail"></div>
                 <div class="timeline-content">
-                    <div class="item-time">
-                        <% if (daily) { %>
-                        <% } else if (monthly) { %><%= date(post.date, "D dddd") %>
-                        <% } else if (config.archive_generator.enabled) { %><%= date(post.date, "M/D dddd") %>
-                        <% } %>
-                    </div>
+                    <% if (daily) { %>
+                        <div class="item-time" v-if="currentChoose === 'date'"></div>
+                    <% } %>
+                    <% if (monthly) { %>
+                        <div class="item-time" v-if="currentChoose === 'month'">
+                            <%= date(post.date, "D dddd") %>
+                        </div>
+                    <% } %>
+                    <% if (yearly) { %>
+                        <div class="item-time" v-if="currentChoose === 'year'">
+                            <%= date(post.date, "M/D dddd") %>
+                        </div>
+                    <% } %>
                     <a href="<%- url_for(post.path) %>">
                         <h3><%= post.title %></h3>
                     </a>

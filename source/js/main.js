@@ -8,6 +8,8 @@ const app = Vue.createApp({
             menuColor: false,
             scrollTop: 0,
             renderers: [],
+            currentChoose: "year",
+            chooseDate: '',
         };
     },
     created() {

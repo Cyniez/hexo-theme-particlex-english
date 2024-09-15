@@ -346,7 +346,7 @@
 }
 
 #home-posts .post .category-and-date .category a,
-#archives a,
+#archives a:not(.el-link),
 #archives .tag-icon,
 #archives .item-time,
 #archives .categories-tags span a:hover .icon,
