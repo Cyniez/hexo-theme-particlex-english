@@ -24,14 +24,16 @@ let posts = page.posts
         <div class="control-view">
             <label class="date-picker-label" for="date-picker">选择日期</label>
             <% let dates = {} %>
-            <% posts.forEach(post => {
+            <% site.posts.forEach(post => {
                 dates["'" + date(post.date, "YYYY-M-D") + "'"] = true
             }) %>
             <el-date-picker :editable="false" :clearable="false" :type="currentChoose"
                             id="date-picker"
+                            @change="assign('<%= url_for('archives/') %>' + (currentChoose === 'year' ? format(chooseDate, 'YYYY') : currentChoose === 'month' ? format(chooseDate, 'YYYY/MM') : format(chooseDate, 'YYYY/MM/DD')))"
                             :disabled-date="date => ![<%- Object.keys(dates).toString() %>].includes(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate())"
                             v-model="chooseDate"></el-date-picker>
-            <el-link class="show-all" :type="chooseDate === '' ? 'primary' : 'default'" @click="chooseDate = ''">全部
+            <el-link class="show-all" :type="chooseDate === '' ? 'primary' : 'default'"
+                     @click="() => {chooseDate = ''; assign(<%= url_for('archives/') %>)}">全部
             </el-link>
         </div>
     </div>

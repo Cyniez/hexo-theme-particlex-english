@@ -1,3 +1,5 @@
+const local = window.location;
+const momentJS = moment;
 const app = Vue.createApp({
     mixins: Object.values(mixins),
     data() {
@@ -40,6 +42,12 @@ const app = Vue.createApp({
             }
             this.scrollTop = newScrollTop;
         },
+        assign(url) {
+            local.assign(url)
+        },
+        format(date, formatText) {
+            return momentJS(date).format(formatText);
+        }
     },
 });
 app.use(ElementPlus);
