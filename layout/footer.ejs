@@ -4,9 +4,9 @@
             &copy;
             <% let now = date(Date.now(), "YYYY") %>
             <% if (theme.footer.since < now) { %>
-                <%= theme.footer.since %> - <%= date(Date.now(), "YYYY") %>
+                <%= theme.footer.since %> - {{ now }}
             <% } else { %>
-                <%= now %>
+                {{ now }}
             <% } %>
             <%= config.title %>
             <span id="footer-icon">

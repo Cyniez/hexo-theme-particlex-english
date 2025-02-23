@@ -13,6 +13,7 @@ const app = Vue.createApp({
             renderers: [],
             currentChoose: "year",
             chooseDate: '',
+            now: new Date(Date.now()).getFullYear()
         };
     },
     created() {
@@ -23,6 +24,7 @@ const app = Vue.createApp({
     mounted() {
         window.addEventListener("scroll", this.handleScroll, true);
         this.currentChoose = storage.getItem("currentChoose") || "year";
+        window.setInterval(() => {this.now = new Date(Date.now()).getFullYear()}, 600000);
         this.render();
     },
     methods: {

@@ -658,6 +658,8 @@ body::-webkit-scrollbar-track {
 
 .content {
     transition: opacity 0.25s;
+    max-height: 500px;
+    overflow: hidden;
 }
 
 .content img,
