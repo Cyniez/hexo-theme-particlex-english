@@ -3,7 +3,7 @@ let posts = page.posts
 %>
 <div id="archives">
     <% if (theme.search.enable) { %>
-        <input id="search-bar" class="input" placeholder="搜索" v-model="rawSearch"/>
+        <input id="search-bar" class="input" placeholder="Search" v-model="rawSearch"/>
     <% } %>
     <div class="control-area">
         <div class="control-text">
@@ -24,7 +24,8 @@ let posts = page.posts
             </el-link>
         </div>
         <div class="control-view">
-            <label class="date-picker-label" for="date-picker">选择日期</label>
+            <label class="date-picker-label" for="date-picker">
+Select date</label>
             <% let dates = {} %>
             <% site.posts.forEach(post => {
                 dates["'" + date(post.date, "YYYY-M-D") + "'"] = true
@@ -34,7 +35,7 @@ let posts = page.posts
                             @change="assign('<%= url_for('archives/') %>' + (currentChoose === 'year' ? format(chooseDate, 'YYYY') : currentChoose === 'month' ? format(chooseDate, 'YYYY/MM') : format(chooseDate, 'YYYY/MM/DD')))"
                             :disabled-date="date => ![<%- Object.keys(dates).toString() %>].includes(date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate())"
                             v-model="chooseDate"></el-date-picker>
-            <el-link class="show-all" @click="assign(<%= url_for('archives/') %>)">全部
+            <el-link class="show-all" @click="assign(<%= url_for('archives/') %>)">All
             </el-link>
         </div>
     </div>
