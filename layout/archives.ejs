@@ -10,17 +10,17 @@ let posts = page.posts
             <el-link v-if="<%= config.archive_generator.enabled && config.archive_generator.yearly %>"
                      :type="currentChoose === 'year' ? 'primary' : 'default'"
                      @click="() => {currentChoose = 'year'; setItem('currentChoose', 'year')}">
-                年
+                Year
             </el-link>
             <el-link v-if="<%= config.archive_generator.enabled && config.archive_generator.monthly %>"
                      :type="currentChoose === 'month' ? 'primary' : 'default'"
                      @click="() => {currentChoose = 'month'; setItem('currentChoose', 'month')}">
-                月
+                Month
             </el-link>
             <el-link v-if="<%= config.archive_generator.enabled && config.archive_generator.daily %>"
                      :type="currentChoose === 'date' ? 'primary' : 'default'"
                      @click="() => {currentChoose = 'date'; setItem('currentChoose', 'date')}">
-                日
+                Date
             </el-link>
         </div>
         <div class="control-view">
