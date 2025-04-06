@@ -1,3 +1,6 @@
+const local = window.location;
+const momentJS = moment;
+const storage = window.localStorage;
 const app = Vue.createApp({
     mixins: Object.values(mixins),
     data() {
@@ -8,6 +11,9 @@ const app = Vue.createApp({
             menuColor: false,
             scrollTop: 0,
             renderers: [],
+            currentChoose: "year",
+            chooseDate: '',
+            now: new Date(Date.now()).getFullYear()
         };
     },
     created() {
@@ -17,6 +23,8 @@ const app = Vue.createApp({
     },
     mounted() {
         window.addEventListener("scroll", this.handleScroll, true);
+        this.currentChoose = storage.getItem("currentChoose") || "year";
+        window.setInterval(() => {this.now = new Date(Date.now()).getFullYear()}, 600000);
         this.render();
     },
     methods: {
@@ -38,6 +46,16 @@ const app = Vue.createApp({
             }
             this.scrollTop = newScrollTop;
         },
+        assign(url) {
+            local.assign(url)
+        },
+        format(date, formatText) {
+            return momentJS(date).format(formatText);
+        },
+        setItem(key, value) {
+            storage.setItem(key, value);
+        }
     },
 });
+app.use(ElementPlus);
 app.mount("#layout");

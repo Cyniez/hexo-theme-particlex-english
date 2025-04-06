@@ -6,7 +6,6 @@ avatar: /images/avatar.jpg
 
 # Home page background image
 background:
-    - /images/background.jpg
 
 # Loading image
 loading: /images/loading.gif
@@ -24,26 +23,6 @@ colors:
 
 # Main menu navigation
 menu:
-    Home:
-        name: house
-        theme: solid
-        link: /
-    About:
-        name: id-card
-        theme: solid
-        link: /about
-    Archives:
-        name: box-archive
-        theme: solid
-        link: /archives
-    Categories:
-        name: bookmark
-        theme: solid
-        link: /categories
-    Tags:
-        name: tags
-        theme: solid
-        link: /tags
 
 # Side info card
 card:
@@ -53,7 +32,6 @@ card:
         ...
     iconLinks:
     friendLinks:
-        Argvchs: https://argvchs.github.io
 
 # Footer info
 footer:
@@ -79,7 +57,7 @@ highlight:
 
 # KaTeX math rendering
 math:
-    enable: false
+    enable: true
 
 # Image preview
 preview:
