@@ -1,0 +1,13 @@
+<a id="mute-button" href="#" onclick="muteAudio()">Mute</a>
+
+<script>
+  function muteAudio() {
+    if (currentAudio.muted) {
+      currentAudio.muted = false;
+      document.getElementById('mute-button').innerHTML = 'Mute';
+    } else {
+      currentAudio.muted = true;
+      document.getElementById('mute-button').innerHTML = 'Unmute';
+    }
+  }
+</script>
