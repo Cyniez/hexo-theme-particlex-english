@@ -909,6 +909,7 @@ blockquote {
 body {
   background-image: url('/image/body.jpg'); /* Replace with your image */
   background-size: cover;
+  font: 500 14px Lexend, "Noto Sans SC", sans-serif;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
@@ -1240,3 +1241,4 @@ ol li {
         padding-left: 20px;
     }
 }
+
